@@ -14,18 +14,16 @@ export async function POST(req: Request) {
       headers: { "Content-Type": "application/json" },
       withCredentials: true,
     });
-    console.log(1);
 
     const backendCookies = apiRes.headers["set-cookie"];
+    console.log("Backend cookies:", backendCookies);
     const res = NextResponse.json(apiRes.data, { status: apiRes.status });
-    console.log(2);
     if (backendCookies) {
       backendCookies.forEach((c: string) => {
         // Pass backend cookies through to the client
         res.headers.append("set-cookie", c);
       });
     }
-    console.log(3);
     return res;
   } catch (err) {
     // err is unknown by default in TS; cast to a narrow interface to access properties safely
