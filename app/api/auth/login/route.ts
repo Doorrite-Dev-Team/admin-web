@@ -6,6 +6,7 @@ const API_BASE =
 
 // POST /api/auth/login
 export async function POST(req: Request) {
+  console.log("POST request received");
   const body = await req.json();
 
   try {
@@ -61,4 +62,10 @@ export async function POST(req: Request) {
     const message = anyErr?.message || "Unknown error";
     return NextResponse.json({ error: message }, { status: 500 });
   }
+}
+export async function GET(request: Request) {
+  return NextResponse.json(
+    { message: "GET request received" },
+    { status: 200 },
+  );
 }
